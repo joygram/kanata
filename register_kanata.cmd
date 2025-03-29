@@ -1,0 +1,1 @@
+mklink "%Appdata%\Microsoft\Windows\Start Menu\Programs\Startup\start_kanata.cmd" start_kanata.cmd
