@@ -34,32 +34,6 @@
   override-release-on-activation yes
 )
 
-;; deflocalkeys-* enables you to define and use key names that match your locale
-;; by defining OS code number mappings for that character.
-;;
-;; There are five variants of deflocalkeys-*:
-;; - deflocalkeys-win
-;; - deflocalkeys-winiov2
-;; - deflocalkeys-wintercept
-;; - deflocalkeys-linux
-;; - deflocalkeys-macos
-
-(deflocalkeys-win
-  ì 187
-)
-(deflocalkeys-wintercept
-  ì 187
-)
-(deflocalkeys-winiov2
-  ì 187
-)
-(deflocalkeys-linux
-  ì 13
-)
-(deflocalkeys-macos
-  ì 13
-)
-
 ;; Only one defsrc is allowed.
 (defsrc
   grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
@@ -73,6 +47,7 @@
   grv @grl
   caps @caps
   f15 @f15
+  ralt kana
 )
 (deflayer qwerty-layer
   @grl 1    2    3    4    5    6    7    8    9    0    -    =    bspc
@@ -110,9 +85,9 @@
 (deflayer dvorak-layer
   @grl 1    2    3    4    5    6    7    8    9    0    [    ]    bspc
   tab  '    ,    @.ms p    y    f    g    c    r    l    /    =    \
-  @cap @anm @oar @ech @umc @ifk d    h    t    n    s    -    ret
+  @cap @anm @oar @ech _   @ifk d    h    t    n    s    -    ret
   lsft ;    q    j    k    x    b    m    w    v    z    rsft
-  lctl lmet lalt           spc           @ralt rmet @rcl
+  lctl lmet lalt           spc           ralt rmet @rcl
 )
 
 (defalias
@@ -127,7 +102,6 @@
 
   num (layer-toggle numbers)
   chr (layer-toggle chords)
-  msc (layer-toggle misc)
   fks (layer-while-held fakekeys)
 )
 (defalias
@@ -157,20 +131,15 @@
   anm (tap-hold 200 200 a @num)   ;; tap: a      hold: numbers layer
   oar (tap-hold 200 200 o @arr)   ;; tap: o      hold: arrows layer
   ech (tap-hold 200 200 e @chr)   ;; tap: e      hold: chords layer
-  umc (tap-hold 200 200 u @msc)   ;; tap: u      hold: misc layer
   ifk (tap-hold 200 200 i @fks)   ;; tap: i      hold: fake keys layer
 
   ;; tap: o    hold: arrows layer    timeout: backspace
   oat (tap-hold-press-timeout   200 200 o @arr bspc)
   ;; tap: e    hold: chords layer    timeout: esc
   ect (tap-hold-release-timeout 200 200 e @chr esc)
-  ;; tap: u    hold: misc layer      early tap if any of: (a o e) are pressed
-  umk (tap-hold-release-keys 200 200 u @msc (a o e))
-  ;; tap: u    hold: misc layer      always tap if any of: (a o e) are pressed
-  uek (tap-hold-except-keys 200 200 u @msc (a o e))
   ;; tap for capslk, hold for lctl
   cap (tap-hold 200 200 caps lctl)
-  ralt (multi ralt (layer-toggle ralted))
+  ;;ralt (multi ralt (layer-toggle ralted))
 )
 
 (environment (LAPTOP lp1)
@@ -269,7 +238,6 @@
 (defalias
   os1 (one-shot 500 lsft)
   os2 (one-shot 500 C-S-lalt)
-  os3 (one-shot 500 (layer-toggle misc))
   osp (one-shot-press 500 lsft)
   osr (one-shot-release 500 lsft)
   opp (one-shot-press-pcancel 500 lsft)
@@ -299,14 +267,6 @@
     (a b c d e f g h i j k l m n o p q r s t u v w x y z 0 1 2 3 4 5 6 7 8 9)
     (kp0 kp1 kp2 kp3 kp4 kp5 kp6 kp7 kp8 kp9 bspc del up down left rght)
   )
-)
-
-(deflayer misc
-  _    _    _    _    _    _    _    _    _    @é   @è   _    ì #|random custom key for testing|#   _
-  _    _    @ab1 _    _    _    ins  @{   @}   [    ]    _    _    +
-  @cw  _    _    _    C-u  _    del  bspc esc  ret  _    _    _
-  @cwc C-z  C-x  C-c  C-v  _    _    _    @td  @os1 @os2 @os3
-  rpt rpt-any _            _              _    _    _
 )
 (deflayer chords      ;; you can put list actions directly in deflayer but it's ugly, so prefer aliases.
   _    _    _    _    _    _    _    _    _    _    @🙁  (unicode 😀) _    _
