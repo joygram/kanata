@@ -43,9 +43,8 @@
   _    @{   @}   _    _    _    _   home  up   end pgup  _    _    _
   _    [    ]    _    _    _    _   left down rght pgdn  _    '
   _    _    _    _    _    _    _    _    _    _    _    /
-  _    _    _              _              _    _    _
-) 
-;; The `lrld` action stands for "live reload".
+  _    caps _              _              _    _    _
+)
 (deflayer layers-layer
   _  lrld  @my-t @qwr-t @mse-t  _    _    _    _    _    _    _    _    _
   _    _    _    _    _    _    _    _    _    _    _    _    _    _
@@ -53,19 +52,10 @@
   _    _    _    _    _    _    _    _    _    _    _    _
   _    _    _              _              _    _    _
 )
-(deflayer dvorak-layer
-  @grl 1    2    3    4    5    6    7    8    9    0    [    ]    bspc
-  tab  '    ,    @.ms p    y    f    g    c    r    l    /    =    \
-  @cap a    o    e    _     i    d    h    t    n    s    -    ret
-  lsft ;    q    j    k    x    b    m    w    v    z    rsft
-  lctl lmet lalt           spc           ralt rmet rctl
-)
-
 (defalias
   my-t  (layer-switch my-layer)
   qwr-t (layer-switch qwerty-layer)
   mse-t (layer-switch mouse-layer)
-  dvk-t (layer-switch dvorak-layer)
 
   lay (layer-toggle layers-layer)
   arr (layer-toggle arrows-layer)
