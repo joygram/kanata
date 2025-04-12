@@ -30,6 +30,9 @@
   grv @grl
   caps @caps
   f19 @lmet
+  f16 @tab
+  f17 @tab
+  esc @esc
 )
 (deflayer qwerty-layer
   @grl 1    2    3    4    5    6    7    8    9    0    -    =    bspc
@@ -41,9 +44,9 @@
 (deflayer arrows-layer
   _    f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12  _
   _    @{   @}   _    _    _    _   home  up   end pgup  _    _    _
-  _    [    ]    _    _    _    _   left down rght pgdn  _    '
+  caps [    ]    _    _    _    _   left down rght pgdn  _    '
   _    _    _    _    _    _    _    _    _    _    _    /
-  _    caps _              _              _    _    _
+  _    _    _              _              _    _    _
 )
 (deflayer layers-layer
   _  lrld  @my-t @qwr-t @mse-t  _    _    _    _    _    _    _    _    _
@@ -64,10 +67,11 @@
   num (layer-toggle numbers)
 )
 (defalias
-  grl (tap-hold 200 200 grv @arr)   ;; tap: grave  hold: layers layer
-  tab (tap-hold 200 200 tab @arr)   ;; tap: tab  hold: arrows layer
-  caps (tap-hold 200 200 tab @arr)   ;; tap: tab  hold: arrows layer
-  lmet (tap-hold 200 200 lmet @arr)   ;; tap: lmet  hold: arrows layer
+  grl (tap-hold 200 200 grv @arr)   
+  tab (tap-hold 200 200 tab @arr)   
+  caps (tap-hold 200 200 tab @arr)   
+  lmet (tap-hold 200 200 lmet @arr)
+  esc (tap-hold 200 200 esc @arr)
 )
 
 (defalias
