@@ -4,48 +4,64 @@
   rapid-event-delay 5
   override-release-on-activation yes
 )
-
 (defsrc
-  esc  1    2    3    4    5    6    7    8    9    0    -    =    bspc
-  tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
-  caps a    s    d    f    g    h    j    k    l    ;    '    ret
-  lsft z    x    c    v    b    n    m    ,    .    /    rsft
-  lctl lmet lalt           spc            ralt del rctl up down left right
+  esc  1    2    3    4    5    6    7    8    9    0    del
+  tab  q    w    e    r    t    y    u    i    o    p    bspc
+  caps a    s    d    f    g    h    j    k    l    ;    ret
+  lsft z    x    c    v    b    n    m    ,    .    rsft
+  lctl lalt lmet          spc             '    	/   
+  left up down right
 )
-(deflayermap (my-layer)
-  grv @grl
-  esc @esc
-  caps @tab
+(deflayermap (mo-layer)
+  esc  @esc
+  caps @caps
+  tab  @tab
   lmet @lmet
-  f19 @lmet
-  f16 @tab
-  f17 @tab
-  del @del
-  '   ralt
+
+  f19  @lmet
+  f16  @tab
+  f17  @tab
+  del  @del
+  /    @/
 ) 
 (deflayer layer-1
-  grv  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  _  f12
-  _    @{   @}   _    _    _    _   home  up   end pgup  _    _    _
-  _    [    ]    _    _    _    _   left down rght pgdn  _    '
-  _    _    _    _    _    _    _    _   mltp mrtp  _   /
-  _    _    _              _              _   f11   _  up down left right
-)	
-(deflayer layer-2
-  _    1    2    3   4    5    6    7    8     -    =    _    _    \
-  _    @{   @}   _    _    _    _   home  up   @{   @}   _    _    _
-  _    C-a  C-s  _   C-f   _    _   left down   [   ]    _    '
-  _    C-z  C-x C-c  C-v   _    _    _   mltp  mrtp _    ralt
-  _    _    _              _              _    bspc caps @mup @mdown @mleft @mright
+  grv  S-1  S-2  S-3  S-4  S-5  S-6  S-7  S-8   S-9  S-0  \
+  _    @{   @}   _    _    _    _    home  up   [    ]    S-\
+  _    C-a  C-s  C-d  C-f   _    _   left down  _    _    '
+  _    C-z  C-x  C-c C-v   _    _    _   mltp  mrtp ralt
+  _    _    _              _              _    _ 
+  @mleft @mup @mdown @mright
 )
+(deflayer layer-2
+  grv  f1   f2   f3   f4   f5   f6   f7   f8   S--   S-+  \
+  _    @{   @}   _    _    _    _    home up   @{    @}   S-\
+  _    [    ]    _    _    _    _    left down rght pgdn  '
+  _    _    _    _    _    _    _    _    mltp mrtp  /
+  _    _    _              _              _    _  
+  @mleft2 @mup2 @mdown2 @mright2
+)	
+(deflayer layer-3
+  grv  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10   f11
+  _    @{   @}   _    _    _    _    home up   end  pgup  f12
+  _    [    ]    _    _    _    _    left down rght pgdn  '
+  _    _    _    _    _    _    _    _    mltp mrtp  /
+  _    _    _              _              _    _  
+  @mwl @mwu @mwd @mwr
+)	
+
 (defalias
   mo-1 (layer-toggle layer-1)
   mo-2 (layer-toggle layer-2)
+  mo-3 (layer-toggle layer-3)
 
-  esc  (tap-hold 200 200 esc  @mo-2)
-  grl  (tap-hold 200 200 grv  @mo-1)   
-  tab  (tap-hold 200 200 tab  @mo-1)   
-  lmet (tap-hold 200 200 lmet @mo-1)
-  del  (tap-hold 200 200 del  @mo-2)   
+  esc  (tap-hold 200 200 esc  @mo-1)
+  del  (tap-hold 200 200 del  @mo-1)   
+  
+  tab  (tap-hold 200 200 tab  @mo-2)   
+  /    (tap-hold 200 200 /    @mo-2)   
+
+  caps (tap-hold 200 200 tab  @mo-3)   
+  lmet (tap-hold 200 200 lmet @mo-3)
 )
 (defalias
   mwu (mwheel-up 50 120)
@@ -63,13 +79,20 @@
   sm (setmouse 32228 32228)
   fms (movemouse-speed 200)
 
-  mup (movemouse-up 10 10)
-  mleft (movemouse-left 10 10)
-  mdown (movemouse-down 10 10)
-  mright (movemouse-right 10 10)
+  mup (movemouse-up 5 5)
+  mleft (movemouse-left 5 5)
+  mdown (movemouse-down 5 5)
+  mright (movemouse-right 5 5)
+
+  mup2 (movemouse-up 40 40)
+  mleft2 (movemouse-left 50 50)
+  mdown2 (movemouse-down 40 40)
+  mright2 (movemouse-right 50 50)
 
   csv C-S-v
   { S-[
   } S-]
   : S-;
+  _ S--
+  + S-=
 )

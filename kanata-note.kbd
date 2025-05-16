@@ -1,0 +1,75 @@
+(defcfg
+  process-unmapped-keys yes
+  concurrent-tap-hold yes
+  rapid-event-delay 5
+  override-release-on-activation yes
+)
+
+(defsrc
+  esc  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
+  caps a    s    d    f    g    h    j    k    l    ;    '    ret
+  lsft z    x    c    v    b    n    m    ,    .    /    rsft
+  lctl lmet lalt           spc            ralt del rctl up down left right
+)
+(deflayermap (my-layer)
+  grv @grl
+  esc @esc
+  caps @tab
+  lmet @lmet
+  f19 @lmet
+  f16 @tab
+  f17 @tab
+  del @del
+  '   ralt
+) 
+(deflayer layer-1
+  grv  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  _  f12
+  _    @{   @}   _    _    _    _   home  up   end pgup  _    _    _
+  _    [    ]    _    _    _    _   left down rght pgdn  _    '
+  _    _    _    _    _    _    _    _   mltp mrtp  _   /
+  _    _    _              _              _   f11   _  up down left right
+)	
+(deflayer layer-2
+  _    1    2    3   4    5    6    7    8     -    =    _    _    \
+  _    @{   @}   _    _    _    _   home  up   @{   @}   _    _    _
+  _    C-a  C-s  _   C-f   _    _   left down   [   ]    _    '
+  _    C-z  C-x C-c  C-v   _    _    _   mltp  mrtp _    ralt
+  _    _    _              _              _    bspc caps @mup @mdown @mleft @mright
+)
+(defalias
+  mo-1 (layer-toggle layer-1)
+  mo-2 (layer-toggle layer-2)
+
+  esc  (tap-hold 200 200 esc  @mo-2)
+  grl  (tap-hold 200 200 grv  @mo-1)   
+  tab  (tap-hold 200 200 tab  @mo-1)   
+  lmet (tap-hold 200 200 lmet @mo-1)
+  del  (tap-hold 200 200 del  @mo-2)   
+)
+(defalias
+  mwu (mwheel-up 50 120)
+  mwd (mwheel-down 50 120)
+  mwl (mwheel-left 50 120)
+  mwr (mwheel-right 50 120)
+  ms↑ (movemouse-up 1 1)
+  ms← (movemouse-left 1 1)
+  ms↓ (movemouse-down 1 1)
+  ms→ (movemouse-right 1 1)
+  ma↑ (movemouse-accel-up 1 1000 1 5)
+  ma← (movemouse-accel-left 1 1000 1 5)
+  ma↓ (movemouse-accel-down 1 1000 1 5)
+  ma→ (movemouse-accel-right 1 1000 1 5)
+  sm (setmouse 32228 32228)
+  fms (movemouse-speed 200)
+
+  mup (movemouse-up 10 10)
+  mleft (movemouse-left 10 10)
+  mdown (movemouse-down 10 10)
+  mright (movemouse-right 10 10)
+
+  csv C-S-v
+  { S-[
+  } S-]
+  : S-;
+)
